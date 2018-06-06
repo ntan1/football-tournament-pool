@@ -12,3 +12,5 @@ db = firebase.database();
 
 // firebase auth
 const provider = new firebase.auth.GoogleAuthProvider();
+// Initialize the FirebaseUI Widget using Firebase.
+const ui = new firebaseui.auth.AuthUI(firebase.auth());

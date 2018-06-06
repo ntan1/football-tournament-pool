@@ -21,7 +21,7 @@ $(document).ready(function () {
   //   // ...
   // });
 
-  var uiConfig = {
+  let uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
         // User successfully signed in.
