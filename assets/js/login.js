@@ -23,6 +23,12 @@ $(document).ready(function () {
 
     let redirectUrl = "home.html";
 
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location("home.html");
+        }
+    });
+
     let uiConfig = {
         callbacks: {
             signInSuccessWithAuthResult: function (authResult, redirectUrl) {

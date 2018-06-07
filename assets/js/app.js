@@ -1,9 +1,10 @@
 $(document).ready(function () {
 
   let redirectUrl = "home.html";
+  let user;
 
   firebase.auth().onAuthStateChanged(function (user) {
-    let user = user;
+    user = user;
   });
 
   if (user) {
