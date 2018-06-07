@@ -27,8 +27,6 @@ $(document).ready(function () {
     if (user) {
       // User is signed in.
       console.log(user);
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('loader').style.display = 'none';
       window.location = 'home.html';
       $("#welcome-msg").text(`Welcome ${user.displayName}`);
     } else {
