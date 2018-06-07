@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 
   db.ref("/").on("value", function(snap) {
-    console.log(snap.value);
+    console.log(snap.val());
   });
 
 });
