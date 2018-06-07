@@ -16,7 +16,7 @@ $(document).ready(function () {
   // });
 
 
-  db.ref("").on("value", function(snap) {
+  db.ref("/").on("value", function(snap) {
     console.log(snap.value);
   });
 
