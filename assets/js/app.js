@@ -21,6 +21,8 @@ $(document).ready(function () {
   //   // ...
   // });
 
+  let redirectUrl = "home.html";
+
   let uiConfig = {
     callbacks: {
       signInSuccessWithAuthResult: function (authResult, redirectUrl) {
