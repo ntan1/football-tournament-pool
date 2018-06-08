@@ -15,8 +15,8 @@ $(document).ready(function () {
   //   }
   // });
 
+  console.log(user);
   if (user != null) {
-    console.log("user obj" + user);
     user.providerData.forEach(function (profile) {
       // console.log("Sign-in provider: " + profile.providerId);
       // console.log("  Provider-specific UID: " + profile.uid);
@@ -107,7 +107,7 @@ $(document).ready(function () {
   $("#sign-out").on("click", function () {
     firebase.auth().signOut().then(function () {
       console.log('Signed Out');
-      window.location("index.html");
+      window.location = ("index.html");
     }, function (error) {
       console.error('Sign Out Error', error);
     });
