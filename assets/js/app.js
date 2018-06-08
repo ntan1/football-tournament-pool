@@ -25,7 +25,8 @@ $(document).ready(function () {
       // console.log("  Photo URL: " + profile.photoURL);
     });
   }
-  $("#welcome-msg").text(`Welcome ${user.displayName}`);
+  // $("#welcome-msg").text(`Welcome ${user.displayName}`);
+  $("#welcome-msg").text(`Welcome person`);
 
   // get teams
   wcRef.doc("teams").get()
