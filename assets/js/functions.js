@@ -22,7 +22,7 @@ function uploadPredictions() {
                 usersRef.doc(user.providerData[0].uid).update({predictions: predictions});
                 console.log("set new uid");
             } else {
-                usersRef.doc(user.providerData[0].uid).set({name: user.displayName});
+                usersRef.doc(user.providerData[0].uid).update({name: user.displayName});
                 console.log("updated uid");
             }
         })
