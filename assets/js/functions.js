@@ -58,39 +58,37 @@ function getPredictions(uid) {
                 $.each(snap.data()["predictions"], function (id, val) {
                     predictions[id] = val;
                 });
-                // get matches
-                wcRef.doc("matches").get()
-                    .then(function (doc) {
-                        if (doc.exists) {
-                            $.each(doc.data(), function (group, val) {
-                                // doc.data().forEach(function (group, val) {
-                                for (let i = 0; i < val.matches.length; i++) {
-                                    let days = moment(val.matches[i].date).diff(moment(), "days");
-                                    let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
-                                    console.log(seconds);
-                                    // console.log(days);
-                                    if (days <= rangeLimit && days >= 0 && seconds >= 0) {
-                                        let match = {
-                                            id: val.matches[i].name,
-                                            group: group,
-                                            home_team: val.matches[i].home_team,
-                                            away_team: val.matches[i].away_team,
-                                            home_result: "",
-                                            away_result: "",
-                                            stadium: val.matches[i].stadium,
-                                            type: val.matches[i].type,
-                                            date: val.matches[i].date,
-                                        };
-                                        predictions[val.matches[i].name]["date"] = val.matches[i].date;
-                                        matches[val.matches[i].name] = match;
-                                        addFixture(match);
-                                    }
-                                }
-                            });
-                        }
-                    });
-            } else {
-
             }
+            // get matches
+            wcRef.doc("matches").get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        $.each(doc.data(), function (group, val) {
+                            // doc.data().forEach(function (group, val) {
+                            for (let i = 0; i < val.matches.length; i++) {
+                                let days = moment(val.matches[i].date).diff(moment(), "days");
+                                let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
+                                console.log(seconds);
+                                // console.log(days);
+                                if (days <= rangeLimit && days >= 0 && seconds >= 0) {
+                                    let match = {
+                                        id: val.matches[i].name,
+                                        group: group,
+                                        home_team: val.matches[i].home_team,
+                                        away_team: val.matches[i].away_team,
+                                        home_result: "",
+                                        away_result: "",
+                                        stadium: val.matches[i].stadium,
+                                        type: val.matches[i].type,
+                                        date: val.matches[i].date,
+                                    };
+                                    predictions[val.matches[i].name]["date"] = val.matches[i].date;
+                                    matches[val.matches[i].name] = match;
+                                    addFixture(match);
+                                }
+                            }
+                        });
+                    }
+                });
         });
 }
