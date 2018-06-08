@@ -35,8 +35,10 @@ function getPredictions(uid) {
         .then(function (snap) {
             if (snap.exists) {
                 $.each(snap.data()["predictions"], function (id, val) {
+                    console.log("id: " + id + " val: " + val);
                     predictions[id] = val;
                 });
+                console.log(predictions);
             } else {
 
             }
