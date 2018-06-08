@@ -13,7 +13,16 @@ function getTeamName(id) {
 }
 
 function uploadPredictions() {
-    usersRef.doc(user.providerData[0].uid["predictions"]).update(predictions);
+    console.log(user);
+    console.log("uid: " + user.providerData[0].uid);
+    usersRef.doc(user.providerData[0].uid).get()
+        .then(function (snap) {
+            if (!snap) {
+                usersRef.doc(user.providerData[0].uid).set(predictions);
+            } else {
+                usersRef.doc(user.providerData[0].uid).update(predictions);
+            }
+        })
 }
 
 function getPredictions(uid) {

@@ -88,7 +88,6 @@ $(document).ready(function () {
     let completed = true;
     for (let i = 0; i < allPredictions.length; i++) {
       let id = $(allPredictions[i]).data("id");
-      console.log("id: " + id);
       let homeScore = parseInt($(allPredictions[i]).find(".home-result").val());
       let awayScore = parseInt($(allPredictions[i]).find(".away-result").val());
       if (!isNaN(homeScore) && !isNaN(awayScore) && homeScore >= 0 && awayScore >= 0) {
@@ -97,13 +96,13 @@ $(document).ready(function () {
           away_result: awayScore,
         }
         predictions[id] = match;
-        console.log(predictions)
       } else {
         $("#confirm-msg").text("Please fill out all predictions and only integers allowed");
         completed = false;
         break;
       }
     }
+    console.log(predictions);
     if (completed) {
       uploadPredictions();
     }
