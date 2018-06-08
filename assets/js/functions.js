@@ -34,12 +34,11 @@ function getPredictions(uid) {
     usersRef.doc(uid).get()
         .then(function (snap) {
             if (snap.exists) {
-                $.forEach(snap.data()["predictions"], function (id, val) {
+                $.each(snap.data()["predictions"], function (id, val) {
                     predictions[id] = val;
                 });
             } else {
 
             }
         });
-    console.log(usersRef.doc(uid).data());
 }
