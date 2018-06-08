@@ -1,0 +1,17 @@
+.match-start-in {
+    color: green;
+    font-weight: bold;
+}
+
+.match-time {
+    color: green;
+    font-weight: bold;
+}
+
+.home-team {
+    font-weight: bold;
+}
+
+.away-team {
+    font-weight: bold;
+}
