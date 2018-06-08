@@ -17,17 +17,36 @@ function getTeamName(id) {
 }
 
 function uploadPredictions() {
-    console.log(user);
-    console.log("uid: " + user.providerData[0].uid);
     usersRef.doc(user.providerData[0].uid).get()
         .then(function (snap) {
             if (snap.exists) {
-                usersRef.doc(user.providerData[0].uid).update({ predictions: Object.assign({}, predictions) });
-                console.log("updated uid");
+                usersRef.doc(user.providerData[0].uid).update({ predictions: Object.assign({}, predictions) })
+                    .then(function () {
+                        $("#confirm-msg").text("Predictions updated!");
+                        console.log("updated uid");
+                    })
+                    .catch(function (error) {
+                        console.log("Error writing document: " + error);
+                        $("#confirm-msg").text("There was an error, please try again later");
+                    });
             } else {
-                usersRef.doc(user.providerData[0].uid).set({ name: user.displayName });
-                usersRef.doc(user.providerData[0].uid).set({ predictions: Object.assign({}, predictions) });
-                console.log("set new uid");
+                usersRef.doc(user.providerData[0].uid).set({ name: user.displayName })
+                    .then(function () {
+                        $("#confirm-msg").text("Predictions updated!");
+                    })
+                    .catch(function (error) {
+                        console.log("Error writing document: " + error);
+                        $("#confirm-msg").text("There was an error, please try again later");
+                    });
+                usersRef.doc(user.providerData[0].uid).set({ predictions: Object.assign({}, predictions) })
+                    .then(function () {
+                        console.log("set new uid");
+                        $("#confirm-msg").text("Predictions updated!");
+                    })
+                    .catch(function (error) {
+                        console.log("Error writing document: " + error);
+                        $("#confirm-msg").text("There was an error, please try again later");
+                    });
             }
         })
 }
@@ -39,12 +58,10 @@ function getPredictions(uid) {
                 $.each(snap.data()["predictions"], function (id, val) {
                     predictions[id] = val;
                 });
-                console.log(predictions);
                 // get matches
                 wcRef.doc("matches").get()
                     .then(function (doc) {
                         if (doc.exists) {
-                            console.log(doc.data());
                             $.each(doc.data(), function (group, val) {
                                 // doc.data().forEach(function (group, val) {
                                 for (let i = 0; i < val.matches.length; i++) {
@@ -67,7 +84,6 @@ function getPredictions(uid) {
                                     }
                                 }
                             });
-                            console.log(matches);
                         }
                     });
             } else {

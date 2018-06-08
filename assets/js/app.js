@@ -7,32 +7,21 @@ $(document).ready(function () {
       user = theUser;
       console.log(theUser);
       theUser.providerData.forEach(function (profile) {
-        console.log("Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
+        // console.log("Sign-in provider: " + profile.providerId);
+        // console.log("  Provider-specific UID: " + profile.uid);
+        // console.log("  Name: " + profile.displayName);
+        // console.log("  Email: " + profile.email);
+        // console.log("  Photo URL: " + profile.photoURL);
+        
+        // get predictions 
         getPredictions(profile.uid);
       });
       $("#welcome-msg").text(`Welcome ${theUser.displayName}`);
-      // get predictions 
     } else {
       // No user is signed in.
       console.log("not logged in");
     }
   });
-
-  // firebase.auth().onAuthStateChanged(function (user) {
-  //   // user = user;
-  //   if (user) {
-  //     // User is signed in.
-  //     console.log(user);
-  //     $("#welcome-msg").text(`Welcome ${user.displayName}`);
-  //   } else {
-  //     window.location = 'index.html';
-
-  //   }
-  // });
 
   // get teams
   wcRef.doc("teams").get()
@@ -87,13 +76,4 @@ $(document).ready(function () {
       console.error('Sign Out Error', error);
     });
   });
-
-  // usersRef.doc(profile.uid).onSnapshot(function (doc) {
-  //   if (!doc) {
-  //     console.log(doc.data());
-  //   }
-  // });
-
-
-
 });
