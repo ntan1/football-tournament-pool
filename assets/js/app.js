@@ -103,6 +103,16 @@ $(document).ready(function () {
     }
   });
 
+  // sign out
+  $("#sign-out").on("click", function () {
+    firebase.auth().signOut().then(function () {
+      console.log('Signed Out');
+      window.location("index.html");
+    }, function (error) {
+      console.error('Sign Out Error', error);
+    });
+  });
+
   // usersRef.doc(profile.uid).onSnapshot(function (doc) {
   //   if (!doc) {
   //     console.log(doc.data());
