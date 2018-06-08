@@ -2,6 +2,14 @@ $(document).ready(function () {
 
   let redirectUrl = "home.html";
   let user = firebase.auth().currentUser;
+  firebase.auth().onAuthStateChanged(function (theUser) {
+    if (theUser) {
+      // User is signed in.
+      user = theUser;
+    } else {
+      // No user is signed in.
+    }
+  });
 
   // firebase.auth().onAuthStateChanged(function (user) {
   //   // user = user;
