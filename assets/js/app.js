@@ -47,18 +47,23 @@ $(document).ready(function () {
       let id = $(allPredictions[i]).data("id");
       let homeScore = parseInt($(allPredictions[i]).find(".home-result").val());
       let awayScore = parseInt($(allPredictions[i]).find(".away-result").val());
+      let seconds = moment(predictions[id]["date"]).diff(moment(), "seconds");
+      console.log("seconds remaining: " + seconds);
       if (!isNaN(homeScore) && !isNaN(awayScore) && homeScore >= 0 && awayScore >= 0) {
-        let match = {
-          home_result: homeScore,
-          away_result: awayScore,
+        if (seconds >= 0) {
+          let match = {
+            home_result: homeScore,
+            away_result: awayScore,
+          }
+          predictions[id] = match;
         }
-        predictions[id] = match;
       } else {
         $("#confirm-msg").text("Please fill out all predictions and only integers allowed");
         completed = false;
         break;
       }
     }
+    console.log(predictions);
     if (completed) {
       uploadPredictions();
     }

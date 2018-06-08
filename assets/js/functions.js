@@ -66,8 +66,10 @@ function getPredictions(uid) {
                                 // doc.data().forEach(function (group, val) {
                                 for (let i = 0; i < val.matches.length; i++) {
                                     let days = moment(val.matches[i].date).diff(moment(), "days");
+                                    let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
+                                    console.log(seconds);
                                     // console.log(days);
-                                    if (days <= rangeLimit && days >= 0) {
+                                    if (days <= rangeLimit && days >= 0 && seconds >= 0) {
                                         let match = {
                                             id: val.matches[i].name,
                                             group: group,
@@ -79,6 +81,7 @@ function getPredictions(uid) {
                                             type: val.matches[i].type,
                                             date: val.matches[i].date,
                                         };
+                                        predictions[val.matches[i].name]["date"] = val.matches[i].date;
                                         matches[val.matches[i].name] = match;
                                         addFixture(match);
                                     }
