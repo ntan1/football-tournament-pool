@@ -66,6 +66,7 @@ function getPredictions(uid) {
                                 // doc.data().forEach(function (group, val) {
                                 for (let i = 0; i < val.matches.length; i++) {
                                     let days = moment(val.matches[i].date).diff(moment(), "days");
+                                    let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
                                     console.log(seconds);
                                     // console.log(days);
                                     if (days <= rangeLimit && days >= 0 && seconds >= 0) {
