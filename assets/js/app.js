@@ -6,8 +6,17 @@ $(document).ready(function () {
     if (theUser) {
       // User is signed in.
       user = theUser;
-      console.log("logged in");
       console.log(theUser);
+      theUser.providerData.forEach(function (profile) {
+        console.log("Sign-in provider: " + profile.providerId);
+        console.log("  Provider-specific UID: " + profile.uid);
+        console.log("  Name: " + profile.displayName);
+        console.log("  Email: " + profile.email);
+        console.log("  Photo URL: " + profile.photoURL);
+        getPredictions(profile.uid);
+      });
+      $("#welcome-msg").text(`Welcome ${theUser.displayName}`);
+      // get predictions 
     } else {
       // No user is signed in.
       console.log("not logged in");
@@ -26,7 +35,6 @@ $(document).ready(function () {
   //   }
   // });
 
-  console.log(user);
   if (user != null) {
     user.providerData.forEach(function (profile) {
       // console.log("Sign-in provider: " + profile.providerId);
@@ -36,8 +44,6 @@ $(document).ready(function () {
       // console.log("  Photo URL: " + profile.photoURL);
     });
   }
-  // $("#welcome-msg").text(`Welcome ${user.displayName}`);
-  $("#welcome-msg").text(`Welcome person`);
 
   // get teams
   wcRef.doc("teams").get()
@@ -85,7 +91,6 @@ $(document).ready(function () {
         console.log(matches);
       }
     });
-
 
   // submit action
   $("#submitPredictions").on("click", function () {

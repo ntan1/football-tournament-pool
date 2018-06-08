@@ -12,6 +12,10 @@ function getTeamName(id) {
     return teams[id].name;
 }
 
-// function uploadPredictions() {
-//     usersRef.doc().update();
-// }
+function uploadPredictions() {
+    usersRef.doc(user.providerData[0].uid["predictions"]).update(predictions);
+}
+
+function getPredictions(uid) {
+    console.log(usersRef.doc(uid).data);
+}
