@@ -23,6 +23,8 @@ const users = "users";
 const wcRef = db.collection(tournament);
 const usersRef = db.collection(users);
 
+let user = firebase.auth().currentUser;
+
 let rangeLimit = 10; // display only matches 10 days from now
 let matches = [];
 let teams = [];

@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
   let redirectUrl = "home.html";
-  let user = firebase.auth().currentUser;
   firebase.auth().onAuthStateChanged(function (theUser) {
     if (theUser) {
       // User is signed in.
@@ -34,16 +33,6 @@ $(document).ready(function () {
 
   //   }
   // });
-
-  if (user != null) {
-    user.providerData.forEach(function (profile) {
-      // console.log("Sign-in provider: " + profile.providerId);
-      // console.log("  Provider-specific UID: " + profile.uid);
-      // console.log("  Name: " + profile.displayName);
-      // console.log("  Email: " + profile.email);
-      // console.log("  Photo URL: " + profile.photoURL);
-    });
-  }
 
   // get teams
   wcRef.doc("teams").get()
@@ -99,6 +88,7 @@ $(document).ready(function () {
     let completed = true;
     for (let i = 0; i < allPredictions.length; i++) {
       let id = $(allPredictions[i]).data("id");
+      console.log("id: " + id);
       let homeScore = parseInt($(allPredictions[i]).find(".home-result").val());
       let awayScore = parseInt($(allPredictions[i]).find(".away-result").val());
       if (!isNaN(homeScore) && !isNaN(awayScore) && homeScore >= 0 && awayScore >= 0) {
@@ -113,9 +103,9 @@ $(document).ready(function () {
         completed = false;
         break;
       }
-      if (completed) {
-        uploadPredictions();
-      }
+    }
+    if (completed) {
+      uploadPredictions();
     }
   });
 
