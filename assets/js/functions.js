@@ -38,6 +38,36 @@ function getPredictions(uid) {
                     predictions[id] = val;
                 });
                 console.log(predictions);
+                // get matches
+                wcRef.doc("matches").get()
+                    .then(function (doc) {
+                        if (doc.exists) {
+                            console.log(doc.data());
+                            $.each(doc.data(), function (group, val) {
+                                // doc.data().forEach(function (group, val) {
+                                for (let i = 0; i < val.matches.length; i++) {
+                                    let days = moment(val.matches[i].date).diff(moment(), "days");
+                                    // console.log(days);
+                                    if (days <= rangeLimit && days >= 0) {
+                                        let match = {
+                                            id: val.matches[i].name,
+                                            group: group,
+                                            home_team: val.matches[i].home_team,
+                                            away_team: val.matches[i].away_team,
+                                            home_result: "",
+                                            away_result: "",
+                                            stadium: val.matches[i].stadium,
+                                            type: val.matches[i].type,
+                                            date: val.matches[i].date,
+                                        };
+                                        matches[val.matches[i].name] = match;
+                                        addFixture(match);
+                                    }
+                                }
+                            });
+                            console.log(matches);
+                        }
+                    });
             } else {
 
             }
