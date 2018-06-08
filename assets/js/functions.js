@@ -30,15 +30,15 @@ function uploadPredictions() {
                         $("#confirm-msg").text("There was an error, please try again later");
                     });
             } else {
-                usersRef.doc(user.providerData[0].uid).set({ name: user.displayName })
-                    .then(function () {
-                        $("#confirm-msg").text("Predictions updated!");
-                    })
-                    .catch(function (error) {
-                        console.log("Error writing document: " + error);
-                        $("#confirm-msg").text("There was an error, please try again later");
-                    });
-                usersRef.doc(user.providerData[0].uid).set({ predictions: Object.assign({}, predictions) })
+                // usersRef.doc(user.providerData[0].uid).set({ name: user.displayName })
+                //     .then(function () {
+                //         $("#confirm-msg").text("Predictions updated!");
+                //     })
+                //     .catch(function (error) {
+                //         console.log("Error writing document: " + error);
+                //         $("#confirm-msg").text("There was an error, please try again later");
+                //     });
+                usersRef.doc(user.providerData[0].uid).set({ name: user.displayName, predictions: Object.assign({}, predictions) })
                     .then(function () {
                         console.log("set new uid");
                         $("#confirm-msg").text("Predictions updated!");

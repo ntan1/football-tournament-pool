@@ -5,14 +5,13 @@ $(document).ready(function () {
     if (theUser) {
       // User is signed in.
       user = theUser;
-      console.log(theUser);
       theUser.providerData.forEach(function (profile) {
         // console.log("Sign-in provider: " + profile.providerId);
         // console.log("  Provider-specific UID: " + profile.uid);
         // console.log("  Name: " + profile.displayName);
         // console.log("  Email: " + profile.email);
         // console.log("  Photo URL: " + profile.photoURL);
-        
+
         // get predictions 
         getPredictions(profile.uid);
       });
@@ -28,7 +27,6 @@ $(document).ready(function () {
     .then(function (doc) {
       if (doc.exists) {
         let tempTeams = doc.data().teams;
-        console.log(doc.data());
         for (let i = 0; i < tempTeams.length; i++) {
           let team = {
             name: tempTeams[i].name,
@@ -61,7 +59,6 @@ $(document).ready(function () {
         break;
       }
     }
-    console.log(predictions);
     if (completed) {
       uploadPredictions();
     }
