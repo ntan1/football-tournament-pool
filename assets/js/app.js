@@ -55,7 +55,9 @@ $(document).ready(function () {
             home_result: homeScore,
             away_result: awayScore,
           }
-          predictions[id] = match;
+          // predictions[id]= match;
+          predictions[id]["home_result"] = homeScore;
+          predictions[id]["away_result"] = awayScore;
         }
       } else {
         $("#confirm-msg").text("Please fill out all predictions and only integers allowed");

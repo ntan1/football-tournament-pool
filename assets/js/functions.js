@@ -81,7 +81,7 @@ function getPredictions(uid) {
                                             type: val.matches[i].type,
                                             date: val.matches[i].date,
                                         };
-                                        predictions[val.matches[i].name]["date"] = val.matches[i].date;
+                                        predictions[val.matches[i].name] = {date: val.matches[i].date};
                                         matches[val.matches[i].name] = match;
                                         addFixture(match);
                                     }
