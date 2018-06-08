@@ -6,8 +6,11 @@ $(document).ready(function () {
     if (theUser) {
       // User is signed in.
       user = theUser;
+      console.log("logged in");
+      console.log(theUser);
     } else {
       // No user is signed in.
+      console.log("not logged in");
     }
   });
 
