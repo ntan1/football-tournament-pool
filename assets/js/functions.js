@@ -17,14 +17,12 @@ function uploadPredictions() {
     console.log("uid: " + user.providerData[0].uid);
     usersRef.doc(user.providerData[0].uid).get()
         .then(function (snap) {
-            let tempP = {};            
-            tempP["predictions"] = predictions;
             if (snap.exists) {
-                usersRef.doc(user.providerData[0].uid).update(tempP);
+                usersRef.doc(user.providerData[0].uid).update({predictions: predictions});
                 console.log("updated uid");
             } else {
                 usersRef.doc(user.providerData[0].uid).set({name: user.displayName});
-                usersRef.doc(user.providerData[0].uid).set(tempP);
+                usersRef.doc(user.providerData[0].uid).set({predictions: predictions});
                 console.log("set new uid");
             }
         })
