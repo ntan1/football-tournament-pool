@@ -75,7 +75,7 @@ function getPredictions(uid) {
                     if (doc.exists) {
                         $.each(doc.data(), function (group, val) {
                             // doc.data().forEach(function (group, val) {
-                            for (let i = 1; i < val.matches.length; i++) {
+                            for (let i = 0; i < val.matches.length; i++) {
                                 let days = moment(val.matches[i].date).diff(moment(), "days");
                                 let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
                                 // console.log(days);
