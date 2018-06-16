@@ -14,9 +14,9 @@ function addFixture(match, active = true) {
     matchDiv.append(awayPredict);
     matchDiv.append(`<label class="away-team">${getTeamName(match.away_team)}</label>`);
     if (active) {
-        $("#predictions-active").append(matchDiv, dateDiv);
+        $("#predictions-inactive").append(matchDiv, dateDiv);
     } else {
-        $("#predictions-inactive").append(matchDiv);
+        $("#predictions-active").append(matchDiv);
     }
 }
 
