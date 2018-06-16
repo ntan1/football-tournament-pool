@@ -9,14 +9,14 @@ function addFixture(match, active = true) {
         homePredict = $(`<input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
         awayPredict = $(`<input class="away-result" type="text" size="2">`).val(predictions[match.id]["away_result"]);
     }
-    matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)}</label>`);
+    matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)} </label>`);
     matchDiv.append(homePredict, " vs ");
     matchDiv.append(awayPredict);
-    matchDiv.append(`<label class="away-team">${getTeamName(match.away_team)}</label>`);
+    matchDiv.append(`<label class="away-team"> ${getTeamName(match.away_team)}</label>`);
     if (active) {
-        $("#predictions-inactive").append(matchDiv, dateDiv);
+        $("#predictions-active").append(matchDiv, dateDiv);
     } else {
-        $("#predictions-active").append(matchDiv);
+        $("#predictions-inactive").append(matchDiv);
     }
 }
 
