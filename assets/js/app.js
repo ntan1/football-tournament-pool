@@ -48,6 +48,7 @@ $(document).ready(function () {
       let homeScore = parseInt($(allPredictions[i]).find(".home-result").val());
       let awayScore = parseInt($(allPredictions[i]).find(".away-result").val());
       let seconds = moment(predictions[id]["date"]).diff(moment(), "seconds");
+      console.log(id + " home: " + homeScore + " away: " + awayScore + " seconds: " + seconds);
       if (!isNaN(homeScore) && !isNaN(awayScore) && homeScore >= 0 && awayScore >= 0) {
         if (seconds >= 0) {
           let match = {
