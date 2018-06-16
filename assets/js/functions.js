@@ -1,15 +1,24 @@
-function addFixture(match) {
+function addFixture(match, active = true) {
     let matchDiv = $(`<div class='col-8 match' data-id=${match.id}>`);
-    let dateDiv = $("<div class='col-4'>");
-    let homePredict = $(`<input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
-    let awayPredict = $(`<input class="away-result" type="text" size="2">`).val(predictions[match.id]["away_result"]);
-    dateDiv.append(`Match starts <span class="match-start-in">${moment(match.date).from(moment())}</span> at `);
-    dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
+    if (active) {
+        let dateDiv = $("<div class='col-4'>");
+        dateDiv.append(`Match starts <span class="match-start-in">${moment(match.date).from(moment())}</span> at `);
+        dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
+        let homePredict = $(`<input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
+        let awayPredict = $(`<input class="away-result" type="text" size="2">`).val(predictions[match.id]["away_result"]);
+    } else {
+        let homePredict = $(`<div class="home-result">`).text(predictions[match.id]["home_result"]);
+        let awayPredict = $(`<div class="away-result">`).text(predictions[match.id]["away_result"]);
+    }
     matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)}</label>`);
     matchDiv.append(homePredict, " vs ");
     matchDiv.append(awayPredict);
     matchDiv.append(`<label class="away-team">${getTeamName(match.away_team)}</label>`);
-    $("#predictions").append(matchDiv, dateDiv);
+    if (active) {
+        $("#predictions-active").append(matchDiv, dateDiv);
+    } else {
+        $("#predictions-inactive").append(matchDiv);
+    }
 }
 
 function getTeamName(id) {
@@ -51,7 +60,7 @@ function uploadPredictions() {
         })
 }
 
-function getPredictions(uid) {
+function getPredictions(uid, addFixture = false) {
     usersRef.doc(uid).get()
         .then(function (snap) {
             if (snap.exists) {
@@ -68,27 +77,28 @@ function getPredictions(uid) {
                             for (let i = 0; i < val.matches.length; i++) {
                                 let days = moment(val.matches[i].date).diff(moment(), "days");
                                 let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
-                                console.log(seconds);
                                 // console.log(days);
+                                let match = {
+                                    id: val.matches[i].name,
+                                    group: group,
+                                    home_team: val.matches[i].home_team,
+                                    away_team: val.matches[i].away_team,
+                                    home_result: "",
+                                    away_result: "",
+                                    stadium: val.matches[i].stadium,
+                                    type: val.matches[i].type,
+                                    date: val.matches[i].date,
+                                };
+                                matches[val.matches[i].name] = match;
                                 if (days <= rangeLimit && days >= 0 && seconds >= 0) {
-                                    let match = {
-                                        id: val.matches[i].name,
-                                        group: group,
-                                        home_team: val.matches[i].home_team,
-                                        away_team: val.matches[i].away_team,
-                                        home_result: "",
-                                        away_result: "",
-                                        stadium: val.matches[i].stadium,
-                                        type: val.matches[i].type,
-                                        date: val.matches[i].date,
-                                    };
                                     if (predictions[val.matches[i].name]) {
                                         predictions[val.matches[i].name]["date"] = val.matches[i].date;
                                     } else {
-                                        predictions[val.matches[i].name] = {date: val.matches[i].date};
+                                        predictions[val.matches[i].name] = { date: val.matches[i].date };
                                     }
-                                    matches[val.matches[i].name] = match;
                                     addFixture(match);
+                                } else {
+                                    addFixture(match, false);
                                 }
                             }
                         });
