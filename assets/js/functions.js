@@ -1,8 +1,8 @@
 function addFixture(match, active = true) {
     let matchDiv = $(`<div class='col-8 match' data-id=${match.id}>`);
     let dateDiv = $("<div class='col-4'>");
-    let homePredict = $(`<span>`).text(`${predictions[match.id]["home_result"]} `);
-    let awayPredict = $(`<span>`).text(` ${predictions[match.id]["away_result"]}`);
+    let homePredict = $(`<span>`).text(` ${predictions[match.id]["home_result"]}`);
+    let awayPredict = $(`<span>`).text(`${predictions[match.id]["away_result"]} `);
     if (active) {
         dateDiv.append(`Match starts <span class="match-start-in">${moment(match.date).from(moment())}</span> at `);
         dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
