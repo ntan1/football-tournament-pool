@@ -60,7 +60,7 @@ function uploadPredictions() {
         })
 }
 
-function getPredictions(uid, addFixture = false) {
+function getPredictions(uid) {
     usersRef.doc(uid).get()
         .then(function (snap) {
             if (snap.exists) {
