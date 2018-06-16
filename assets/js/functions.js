@@ -1,15 +1,14 @@
 function addFixture(match, active = true) {
     console.log(match.id, predictions[match.id]);
     let matchDiv = $(`<div class='col-8 match' data-id=${match.id}>`);
-    let homePredict = $(`<input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
-    let awayPredict = $(`<input class="away-result" type="text" size="2">`).val(predictions[match.id]["away_result"]);
     let dateDiv = $("<div class='col-4'>");
+    let homePredict = $(`<span>`).text(predictions[match.id]["home_result"] );
+    let awayPredict = $(`<span>`).text( predictions[match.id]["away_result"]);
     if (active) {
         dateDiv.append(`Match starts <span class="match-start-in">${moment(match.date).from(moment())}</span> at `);
         dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
-    } else {
-        homePredict = $(`<span class="home-result"> `).text(predictions[match.id]["home_result"]);
-        awayPredict = $(` <span class="away-result">`).text(predictions[match.id]["away_result"]);
+        homePredict = $(`<input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
+        awayPredict = $(`<input class="away-result" type="text" size="2">`).val(predictions[match.id]["away_result"]);
     }
     matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)}</label>`);
     matchDiv.append(homePredict, " vs ");

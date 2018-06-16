@@ -13,7 +13,7 @@ $(document).ready(function () {
         // console.log("  Photo URL: " + profile.photoURL);
 
         // get predictions 
-        getPredictions(profile.uid, true);
+        getPredictions(profile.uid);
       });
       $("#welcome-msg").text(`Welcome ${theUser.displayName}`);
     } else {
