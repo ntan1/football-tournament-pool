@@ -164,6 +164,7 @@ function createFixtures() {
     for (let i = 1; i <= matches.length; i++) {
         let days = moment(matches[i].date).diff(moment(), "days");
         let seconds = moment(matches[i].date).diff(moment(), "seconds");
+        console.log(i + " | " + matches[i] + " | " + days);
         if (days <= rangeLimit && days >= 0 && seconds >= 0) {
             if (predictions[i]) {
                 predictions[i]["date"] = matches[i].date;
