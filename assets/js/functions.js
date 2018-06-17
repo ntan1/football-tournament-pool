@@ -161,6 +161,7 @@ function getMatches() {
 }
 
 function createFixtures() {
+    console.log("creating fixtures");
     for (let i = 1; i <= matches.length; i++) {
         let days = moment(matches[i].date).diff(moment(), "days");
         let seconds = moment(matches[i].date).diff(moment(), "seconds");

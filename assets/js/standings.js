@@ -15,6 +15,7 @@ $(document).ready(function () {
                     console.log("got predictions");
                 })
                 .done(function () {
+                    console.log(matches);
                     createFixtures();
                     console.log("created fixtures");
                 });
