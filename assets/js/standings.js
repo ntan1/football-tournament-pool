@@ -3,15 +3,29 @@ $(document).ready(function () {
         if (theUser) {
             // User is signed in.
             user = theUser;
-            // get teams
-            getTeams();
-            // get predictions 
-            getPredictions(theUser.providerData[0].uid);
+            $.when(getTeams())
+                .done(function () {
+                    // get matches
+                    getMatches();
+                    console.log("got matches");
+                })
+                .done(function () {
+                    // get predictions 
+                    getPredictionsTest(theUser.providerData[0].uid);
+                    console.log("got predictions");
+                })
+                .done(function () {
+                    createFixtures();
+                    console.log("created fixtures");
+                });
         } else {
             // No user is signed in.
             console.log("not logged in");
         }
     });
+
+    // get teams
+    // getTeams();
 
     // sign out
     $("#sign-out").on("click", function () {

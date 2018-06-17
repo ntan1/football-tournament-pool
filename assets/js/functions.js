@@ -121,3 +121,58 @@ function getPredictions(uid) {
                 });
         });
 }
+
+function getPredictionsTest(uid) {
+    usersRef.doc(uid).get()
+        .then(function (snap) {
+            if (snap.exists) {
+                $.each(snap.data()["predictions"], function (id, val) {
+                    predictions[id] = val;
+                });
+            }
+        });
+}
+
+// get matches
+function getMatches() {
+    wcRef.doc("matches").get()
+        .then(function (doc) {
+            if (doc.exists) {
+                $.each(doc.data(), function (group, val) {
+                    // doc.data().forEach(function (group, val) {
+                    for (let i = 0; i < val.matches.length; i++) {
+                        // console.log(days);
+                        let match = {
+                            id: val.matches[i].name,
+                            group: group,
+                            home_team: val.matches[i].home_team,
+                            away_team: val.matches[i].away_team,
+                            home_result: val.matches[i].home_result,
+                            away_result: val.matches[i].away_team,
+                            stadium: val.matches[i].stadium,
+                            type: val.matches[i].type,
+                            date: val.matches[i].date,
+                        };
+                        matches[val.matches[i].name] = match;
+                    }
+                });
+            }
+        });
+}
+
+function createFixtures() {
+    for (let i = 1; i <= matches.length; i++) {
+        let days = moment(matches[i].date).diff(moment(), "days");
+        let seconds = moment(matches[i].date).diff(moment(), "seconds");
+        if (days <= rangeLimit && days >= 0 && seconds >= 0) {
+            if (predictions[i]) {
+                predictions[i]["date"] = matches[i].date;
+            } else {
+                predictions[i] = { date: matches[i].date };
+            }
+            addFixture(matches[i]);
+        } else {
+            addFixture(matches[i], false);
+        }
+    }
+}
