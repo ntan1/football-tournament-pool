@@ -6,8 +6,8 @@ function addFixture(match, active = true) {
     if (active) {
         dateDiv.append(`Match starts <span class="match-start-in">${moment(match.date).from(moment())}</span> at `);
         dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
-        homePredict = $(`<input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
-        awayPredict = $(`<input class="away-result" type="text" size="2">`).val(predictions[match.id]["away_result"]);
+        homePredict = $(` <input type="text" size="2" class="home-result">`).val(predictions[match.id]["home_result"]);
+        awayPredict = $(`<input class="away-result" type="text" size="2"> `).val(predictions[match.id]["away_result"]);
     }
     matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)}</label>`);
     matchDiv.append(homePredict, " vs ");
@@ -18,6 +18,22 @@ function addFixture(match, active = true) {
     } else {
         $("#predictions-inactive").append(matchDiv);
     }
+}
+
+function getTeams() {
+    wcRef.doc("teams").get()
+        .then(function (doc) {
+            if (doc.exists) {
+                let tempTeams = doc.data().teams;
+                for (let i = 0; i < tempTeams.length; i++) {
+                    let team = {
+                        name: tempTeams[i].name,
+                        flag: tempTeams[i].flag,
+                    }
+                    teams[tempTeams[i].id] = team;
+                }
+            }
+        });
 }
 
 function getTeamName(id) {
@@ -82,8 +98,8 @@ function getPredictions(uid) {
                                     group: group,
                                     home_team: val.matches[i].home_team,
                                     away_team: val.matches[i].away_team,
-                                    home_result: "",
-                                    away_result: "",
+                                    home_result: val.matches[i].home_result,
+                                    away_result: val.matches[i].away_team,
                                     stadium: val.matches[i].stadium,
                                     type: val.matches[i].type,
                                     date: val.matches[i].date,

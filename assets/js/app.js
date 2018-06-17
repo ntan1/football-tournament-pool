@@ -37,7 +37,6 @@ $(document).ready(function () {
       }
     });
 
-
   // submit action
   $("#submitPredictions").on("click", function () {
     $("#confirm-msg").text("");
