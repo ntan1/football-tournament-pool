@@ -34,6 +34,7 @@ function getTeams() {
                 }
             }
         });
+    return true;
 }
 
 function getTeamName(id) {
@@ -158,6 +159,7 @@ function getMatches() {
                 });
             }
         });
+    return true;
 }
 
 function createFixtures() {
