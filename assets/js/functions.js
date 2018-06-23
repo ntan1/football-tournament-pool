@@ -97,7 +97,8 @@ function uploadScores() {
         //     "away_result": matches[i]["away_result"],
         //     "home_result": matches[i]["home_result"]
         // };
-        updateScores[`matches.${matches[i]["firestoreId"]}`] = {
+        updateScores["matches"] = {}
+        updateScores["matches"][`${matches[i]["firestoreId"]}`] = {
             "away_result": matches[i]["away_result"],
             "home_result": matches[i]["home_result"]
         };
