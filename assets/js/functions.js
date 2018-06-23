@@ -88,14 +88,23 @@ function uploadPredictions() {
         })
 }
 
-function uploadScores(scores) {
-    for (let i=1; i<2; i++) {
+function uploadScores() {
+    console.log("uploading scores...");
+    for (let i = 1; i < 2; i++) {
         let updateScores = {};
         updateScores[`matches.${matches[i]["firestoreId"]}`] = {
             "away_result": matches[i]["away_result"],
-            "home_result": matches[i]["home_result"],
+            "home_result": matches[i]["home_result"]
         };
-        db.collection(tournament).doc("matches").collection("groupd").doc(matches[i]["group"]).update(updateScores);
+        db.collection(tournament).doc("matches").collection("groups").doc(matches[i]["group"]).update(updateScores)
+            .then(function () {
+                console.log("uploading...");
+                $("#confirm-msg").text("Scores updated!");
+            })
+            .catch(function (error) {
+                console.log("Error writing document: " + error);
+                $("#confirm-msg").text("There was an error, please try again later");
+            });
     }
 }
 
