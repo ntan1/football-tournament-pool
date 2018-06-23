@@ -26,10 +26,8 @@ $(document).ready(function () {
                     getMatches();
                     setTimeout(() => {
                         console.log("creating fixtures");
-                        console.log(matches.length);
-                        for (let i = 1; i < matches.length; i++) {
+                        for (let i = 1; i < 1; i++) {
                             if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
-                                console.log("adding fixture " + i);
                                 addFixtureReal(matches[i]);
                             }
                         }
@@ -45,8 +43,34 @@ $(document).ready(function () {
         }
     });
 
-    // get teams
-    // getTeams();
+    // submit scores
+    $("#submitrealScores").on("click", function () {
+        $("#confirm-msg").text("");
+        let allScores = $("#fixture-active").find(".match");
+        let completed = true;
+        for (let i = 0; i < allScores.length; i++) {
+            let id = $(allScores[i]).data("id");
+            let homeScore = parseInt($(allScores[i]).find(".home-result").val());
+            let awayScore = parseInt($(allScores[i]).find(".away-result").val());
+            if (!isNaN(homeScore) && !isNaN(awayScore) && homeScore >= 0 && awayScore >= 0) {
+                let match = {
+                    home_result: homeScore,
+                    away_result: awayScore,
+                }
+                // predictions[id]= match;
+                matches[id]["home_result"] = homeScore;
+                matches[id]["away_result"] = awayScore;
+            } else {
+                $("#confirm-msg").text("Please fill out all scores and only integers allowed");
+                completed = false;
+                break;
+            }
+        }
+        console.log(matches);
+        if (completed) {
+            uploadScores();
+        }
+    });
 
     // sign out
     $("#sign-out").on("click", function () {

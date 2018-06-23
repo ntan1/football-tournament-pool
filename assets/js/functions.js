@@ -88,6 +88,17 @@ function uploadPredictions() {
         })
 }
 
+function uploadScores(scores) {
+    for (let i=1; i<2; i++) {
+        let updateScores = {};
+        updateScores[`matches.${matches[i]["firestoreId"]}`] = {
+            "away_result": matches[i]["away_result"],
+            "home_result": matches[i]["home_result"],
+        };
+        db.collection(tournament).doc("matches").collection("groupd").doc(matches[i]["group"]).update(updateScores);
+    }
+}
+
 function getPredictions(uid) {
     usersRef.doc(uid).get()
         .then(function (snap) {
@@ -156,6 +167,7 @@ function getMatches() {
                     for (let i = 0; i < val.matches.length; i++) {
                         // console.log(days);
                         let match = {
+                            firestoreId = i,
                             id: val.matches[i].name,
                             group: group,
                             home_team: val.matches[i].home_team,
