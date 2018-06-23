@@ -27,7 +27,7 @@ $(document).ready(function () {
                     setTimeout(() => {
                         console.log("creating fixtures");
                         console.log(matches.length);
-                        for (let i = 0; i < matches.length; i++) {
+                        for (let i = 1; i < matches.length; i++) {
                             if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
                                 console.log("adding fixture " + i);
                                 addFixture(matches[i]);
