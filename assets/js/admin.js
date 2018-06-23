@@ -8,17 +8,16 @@ $(document).ready(function () {
                 $.when(getTeams())
                     .done(function () {
                         // get matches
-                        getMatches();
-                        console.log("got matches");
+                        $.when(getMatches())
+                            .done(function () {
+                                for (let i = 0; i < matches.length; i++) {
+                                    if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
+                                        addFixture(matches[i]);
+                                    }
+                                }
+                                console.log("created fixtures");
+                            });
                     })
-                    .done(function () {
-                        for (let i=0; i< matches.length; i++) {
-                            if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
-                                addFixture(matches[i]);
-                            }
-                        }
-                        console.log("created fixtures");
-                    });
             } else {
                 console.log("not allowed");
             }
