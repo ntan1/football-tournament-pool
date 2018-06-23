@@ -167,7 +167,7 @@ function getMatches() {
                     for (let i = 0; i < val.matches.length; i++) {
                         // console.log(days);
                         let match = {
-                            firestoreId = i,
+                            firestoreId: i,
                             id: val.matches[i].name,
                             group: group,
                             home_team: val.matches[i].home_team,
