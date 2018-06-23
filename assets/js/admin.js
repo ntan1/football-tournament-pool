@@ -26,7 +26,7 @@ $(document).ready(function () {
                     getMatches();
                     setTimeout(() => {
                         console.log("creating fixtures");
-                        for (let i = 1; i < 1; i++) {
+                        for (let i = 1; i < 2; i++) {
                             if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
                                 addFixtureReal(matches[i]);
                             }
