@@ -92,6 +92,7 @@ function uploadScores() {
     console.log("uploading scores...");
     for (let i = 1; i < 2; i++) {
         let updateScores = {};
+        updateScores[matches[i]["group"]] = {};
         updateScores[matches[i]["group"]][`matches.${matches[i]["firestoreId"]}`] = {
             "away_result": matches[i]["away_result"],
             "home_result": matches[i]["home_result"]
