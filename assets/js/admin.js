@@ -5,22 +5,37 @@ $(document).ready(function () {
             user = theUser;
             if (theUser.providerData[0].uid === "104550093457820575291") {
                 console.log("admin on");
-                $.when(getTeams())
-                    .done(function () {
-                        // get matches
-                        $.when(getMatches())
-                            .done(function () {
-                                console.log("creating fixtures");
-                                console.log(matches.length);
-                                for (let i = 0; i < matches.length; i++) {
-                                    if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
-                                        console.log("adding fixture " + i);
-                                        addFixture(matches[i]);
-                                    }
-                                }
-                                console.log("created fixtures");
-                            });
-                    })
+                // $.when(getTeams())
+                //     .done(function () {
+                //         // get matches
+                //         $.when(getMatches())
+                //             .done(function () {
+                //                 console.log("creating fixtures");
+                //                 console.log(matches.length);
+                //                 for (let i = 0; i < matches.length; i++) {
+                //                     if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
+                //                         console.log("adding fixture " + i);
+                //                         addFixture(matches[i]);
+                //                     }
+                //                 }
+                //                 console.log("created fixtures");
+                //             });
+                //     });
+                getTeams();
+                setTimeout(() => {
+                    getMatches();
+                    setTimeout(() => {
+                        console.log("creating fixtures");
+                        console.log(matches.length);
+                        for (let i = 0; i < matches.length; i++) {
+                            if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
+                                console.log("adding fixture " + i);
+                                addFixture(matches[i]);
+                            }
+                        }
+                        console.log("created fixtures");
+                    }, 500);
+                }, 500);
             } else {
                 console.log("not allowed");
             }
