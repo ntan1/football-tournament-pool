@@ -92,13 +92,17 @@ function uploadScores() {
     console.log("uploading scores...");
     for (let i = 1; i < 2; i++) {
         let updateScores = {};
-        updateScores[matches[i]["group"]] = {};
-        updateScores[matches[i]["group"]][`matches.${matches[i]["firestoreId"]}`] = {
+        // updateScores[matches[i]["group"]] = {};
+        // updateScores[matches[i]["group"]][`matches.${matches[i]["firestoreId"]}`] = {
+        //     "away_result": matches[i]["away_result"],
+        //     "home_result": matches[i]["home_result"]
+        // };
+        updateScores[`matches.${matches[i]["firestoreId"]}`] = {
             "away_result": matches[i]["away_result"],
             "home_result": matches[i]["home_result"]
         };
         console.log(updateScores);
-        db.collection(tournament).doc("matches").collection("groups").update(updateScores)
+        wcRef.doc("matches").collection("groups").doc(matches[i]["group"]).update(updateScores)
             .then(function () {
                 console.log("uploading...");
                 $("#confirm-msg").text("Scores updated!");
