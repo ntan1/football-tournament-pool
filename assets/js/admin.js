@@ -44,7 +44,7 @@ $(document).ready(function () {
     });
 
     // submit scores
-    $("#submitrealScores").on("click", function () {
+    $("#submitRealScores").on("click", function () {
         $("#confirm-msg").text("");
         let allScores = $("#fixture-active").find(".match");
         let completed = true;
