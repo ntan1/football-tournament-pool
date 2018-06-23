@@ -11,6 +11,7 @@ $(document).ready(function () {
                         $.when(getMatches())
                             .done(function () {
                                 console.log("creating fixtures");
+                                console.log(matches.length);
                                 for (let i = 0; i < matches.length; i++) {
                                     if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
                                         console.log("adding fixture " + i);
