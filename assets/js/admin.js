@@ -3,7 +3,7 @@ $(document).ready(function () {
         if (theUser) {
             // User is signed in.
             user = theUser;
-            if (theUser.providerData[0].uid === 104550093457820575291) {
+            if (theUser.providerData[0].uid === "104550093457820575291") {
                 console.log("admin on");
                 $.when(getTeams())
                     .done(function () {
