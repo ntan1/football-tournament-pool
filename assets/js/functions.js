@@ -97,6 +97,7 @@ function uploadScores() {
             "away_result": matches[i]["away_result"],
             "home_result": matches[i]["home_result"]
         };
+        console.log(updateScores);
         db.collection(tournament).doc("matches").collection("groups").update(updateScores)
             .then(function () {
                 console.log("uploading...");
