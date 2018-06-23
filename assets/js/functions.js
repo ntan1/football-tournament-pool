@@ -23,8 +23,8 @@ function addFixture(match, active = true) {
 function addFixtureReal(match) {
     let matchDiv = $(`<div class='col-8 match' data-id=${match.id}>`);
     let dateDiv = $("<div class='col-4'>");
-    let homeReal = $(`<span>`).text(` ${match["home_result"]}`);
-    let awayReal = $(`<span>`).text(`${match["away_result"]} `);
+    let homeReal = $(` <input type="text" size="2" class="home-result">`).val(match["home_result"] ? match["home_result"] : "");
+    let awayReal = $(`<input class="away-result" type="text" size="2"> `).val(match["away_result"] ? match["away_result"] : "");
     dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
     matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)}</label>`);
     matchDiv.append(homeReal, " vs ");
@@ -161,7 +161,7 @@ function getMatches() {
                             home_team: val.matches[i].home_team,
                             away_team: val.matches[i].away_team,
                             home_result: val.matches[i].home_result,
-                            away_result: val.matches[i].away_team,
+                            away_result: val.matches[i].away_result,
                             stadium: val.matches[i].stadium,
                             type: val.matches[i].type,
                             date: val.matches[i].date,
