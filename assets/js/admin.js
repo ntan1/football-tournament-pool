@@ -30,7 +30,7 @@ $(document).ready(function () {
                         for (let i = 1; i < matches.length; i++) {
                             if (moment(matches[i].date).diff(moment(), "minutes") < 0) {
                                 console.log("adding fixture " + i);
-                                addFixture(matches[i]);
+                                addFixtureReal(matches[i]);
                             }
                         }
                         console.log("created fixtures");

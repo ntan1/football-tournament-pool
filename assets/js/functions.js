@@ -2,7 +2,7 @@ function addFixture(match, active = true) {
     let matchDiv = $(`<div class='col-8 match' data-id=${match.id}>`);
     let dateDiv = $("<div class='col-4'>");
     let homePredict = $(`<span>`).text(` ${predictions[match.id]["home_result"]}`);
-    let awayPredict = $(`<span>`).text(`${predictions[match.id]["away_result"]} `);
+    let awayReal = $(`<span>`).text(`${predictions[match.id]["away_result"]} `);
     if (active) {
         dateDiv.append(`Match starts <span class="match-start-in">${moment(match.date).from(moment())}</span> at `);
         dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
@@ -18,6 +18,19 @@ function addFixture(match, active = true) {
     } else {
         $("#predictions-inactive").append(matchDiv);
     }
+}
+
+function addFixtureReal(match) {
+    let matchDiv = $(`<div class='col-8 match' data-id=${match.id}>`);
+    let dateDiv = $("<div class='col-4'>");
+    let homeReal = $(`<span>`).text(` ${match["home_result"]}`);
+    let awayReal = $(`<span>`).text(`${match["away_result"]} `);
+    dateDiv.append(`<span class="match-time">${moment(match.date).format("M/D h:mma")}</span>`);
+    matchDiv.append(`<label class="home-team">${getTeamName(match.home_team)}</label>`);
+    matchDiv.append(homeReal, " vs ");
+    matchDiv.append(awayReal);
+    matchDiv.append(`<label class="away-team">${getTeamName(match.away_team)}</label>`);
+    $("#fixture-active").append(matchDiv, dateDiv);
 }
 
 function getTeams() {
