@@ -131,8 +131,9 @@ function getPredictions(uid) {
             wcRef.doc("matches-test").get()
                 .then(function (doc) {
                     if (doc.exists) {
-                        $.each(doc.data(), function (matchType, stage) {
-                            $.each(stage, function (group, val) {
+                        // $.each(doc.data(), function (matchType, stage) {
+                            // $.each(stage, function (group, val) {
+                            $.each(doc.data()["knockout"], function (group, val) {
                                 // doc.data().forEach(function (group, val) {
                                 for (let i = 0; i < val.matches.length; i++) {
                                     let days = moment(val.matches[i].date).diff(moment(), "days");
@@ -160,12 +161,13 @@ function getPredictions(uid) {
                                         if (match.home_team < teams.length && match.home_team > 0) {
                                             addFixture(match);
                                         }
-                                    } else if (seconds < 0) {
-                                        addFixture(match, false);
-                                    }
+                                    } 
+                                    // else if (seconds < 0) {
+                                    //     addFixture(match, false);
+                                    // }
                                 }
                             });
-                        });
+                        // });
                     }
                 });
         });
