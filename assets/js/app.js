@@ -39,7 +39,7 @@ $(document).ready(function () {
   function addMatches(tournament, stage) {
     // $.each(matches[stage], function (group, val) {
     //   wcRef.doc("matches").collection("groups").doc(group).set(val)
-      wcRef.doc("matches").set(matches.groups)
+      wcRef.doc("matches-test").set(matches.knockout)
         .then(function () {
           console.log("written");
         })
@@ -69,7 +69,7 @@ $(document).ready(function () {
       });
   }
 
-  addMatches(tournament, "groups");
+  addMatches(tournament, "knockout");
   // addStadiums(tournament);
   // addTeams(tournament);
 
