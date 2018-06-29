@@ -127,7 +127,7 @@ function getPredictions(uid) {
             wcRef.doc("matches-test").get()
                 .then(function (doc) {
                     if (doc.exists) {
-                        $.each(doc.data(), function (stage) {
+                        $.each(doc.data(), function (matchType, stage) {
                             $.each(stage, function (group, val) {
                                 console.log(group, val);
                                 // doc.data().forEach(function (group, val) {
