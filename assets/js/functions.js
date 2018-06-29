@@ -103,7 +103,7 @@ function uploadScores() {
             "home_result": matches[i]["home_result"]
         };
         console.log(updateScores);
-        wcRef.doc("matches").collection("groups").doc(matches[i]["group"]).update(updateScores)
+        wcRef.doc("matches-test").collection("groups").doc(matches[i]["group"]).update(updateScores)
             .then(function () {
                 console.log("uploading...");
                 $("#confirm-msg").text("Scores updated!");
@@ -124,7 +124,7 @@ function getPredictions(uid) {
                 });
             }
             // get matches
-            wcRef.doc("matches").get()
+            wcRef.doc("matches-test").get()
                 .then(function (doc) {
                     if (doc.exists) {
                         $.each(doc.data(), function (group, val) {
@@ -175,7 +175,7 @@ function getPredictionsTest(uid) {
 
 // get matches
 function getMatches() {
-    wcRef.doc("matches").get()
+    wcRef.doc("matches-test").get()
         .then(function (doc) {
             if (doc.exists) {
                 $.each(doc.data(), function (group, val) {
