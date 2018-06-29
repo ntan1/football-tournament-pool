@@ -126,7 +126,9 @@ function getPredictions(uid) {
             // get matches
             wcRef.doc("matches-test").get()
                 .then(function (doc) {
+                    console.log(doc);
                     if (doc.exists) {
+                        console.log(doc.data());
                         $.each(doc.data(), function (group, val) {
                             // doc.data().forEach(function (group, val) {
                             for (let i = 0; i < val.matches.length; i++) {
@@ -139,7 +141,7 @@ function getPredictions(uid) {
                                     home_team: val.matches[i].home_team,
                                     away_team: val.matches[i].away_team,
                                     home_result: val.matches[i].home_result,
-                                    away_result: val.matches[i].away_team,
+                                    away_result: val.matches[i].away_result,
                                     stadium: val.matches[i].stadium,
                                     type: val.matches[i].type,
                                     date: val.matches[i].date,
