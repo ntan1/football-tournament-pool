@@ -126,10 +126,9 @@ function getPredictions(uid) {
             // get matches
             wcRef.doc("matches-test").get()
                 .then(function (doc) {
-                    console.log(doc);
                     if (doc.exists) {
-                        console.log(doc.data());
                         $.each(doc.data(), function (group, val) {
+                            console.log(group, val);
                             // doc.data().forEach(function (group, val) {
                             for (let i = 0; i < val.matches.length; i++) {
                                 let days = moment(val.matches[i].date).diff(moment(), "days");
