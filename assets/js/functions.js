@@ -127,36 +127,38 @@ function getPredictions(uid) {
             wcRef.doc("matches-test").get()
                 .then(function (doc) {
                     if (doc.exists) {
-                        $.each(doc.data(), function (group, val) {
-                            console.log(group, val);
-                            // doc.data().forEach(function (group, val) {
-                            for (let i = 0; i < val.matches.length; i++) {
-                                let days = moment(val.matches[i].date).diff(moment(), "days");
-                                let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
-                                // console.log(days);
-                                let match = {
-                                    id: val.matches[i].name,
-                                    group: group,
-                                    home_team: val.matches[i].home_team,
-                                    away_team: val.matches[i].away_team,
-                                    home_result: val.matches[i].home_result,
-                                    away_result: val.matches[i].away_result,
-                                    stadium: val.matches[i].stadium,
-                                    type: val.matches[i].type,
-                                    date: val.matches[i].date,
-                                };
-                                matches[val.matches[i].name] = match;
-                                if (days <= rangeLimit && days >= 0 && seconds >= 0) {
-                                    if (predictions[val.matches[i].name]) {
-                                        predictions[val.matches[i].name]["date"] = val.matches[i].date;
+                        $.each(doc.data(), function (stage) {
+                            $.each(stage, function (group, val) {
+                                console.log(group, val);
+                                // doc.data().forEach(function (group, val) {
+                                for (let i = 0; i < val.matches.length; i++) {
+                                    let days = moment(val.matches[i].date).diff(moment(), "days");
+                                    let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
+                                    // console.log(days);
+                                    let match = {
+                                        id: val.matches[i].name,
+                                        group: group,
+                                        home_team: val.matches[i].home_team,
+                                        away_team: val.matches[i].away_team,
+                                        home_result: val.matches[i].home_result,
+                                        away_result: val.matches[i].away_result,
+                                        stadium: val.matches[i].stadium,
+                                        type: val.matches[i].type,
+                                        date: val.matches[i].date,
+                                    };
+                                    matches[val.matches[i].name] = match;
+                                    if (days <= rangeLimit && days >= 0 && seconds >= 0) {
+                                        if (predictions[val.matches[i].name]) {
+                                            predictions[val.matches[i].name]["date"] = val.matches[i].date;
+                                        } else {
+                                            predictions[val.matches[i].name] = { date: val.matches[i].date };
+                                        }
+                                        addFixture(match);
                                     } else {
-                                        predictions[val.matches[i].name] = { date: val.matches[i].date };
+                                        addFixture(match, false);
                                     }
-                                    addFixture(match);
-                                } else {
-                                    addFixture(match, false);
                                 }
-                            }
+                            });
                         });
                     }
                 });
