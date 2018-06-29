@@ -156,7 +156,10 @@ function getPredictions(uid) {
                                         } else {
                                             predictions[val.matches[i].name] = { date: val.matches[i].date };
                                         }
-                                        addFixture(match);
+                                        // only add fixture if match has determined teams
+                                        if (match.home_team < teams.length && match.home_team > 0) {
+                                            addFixture(match);
+                                        }
                                     } else if (seconds < 0) {
                                         addFixture(match, false);
                                     }
