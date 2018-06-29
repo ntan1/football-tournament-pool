@@ -36,10 +36,10 @@ $(document).ready(function () {
   const tournament = "world-cup-2018";
   const wcRef = db.collection(tournament);
 
-  function addMatches(tournament, stage) {
+  function addMatches(tournament) {
     // $.each(matches[stage], function (group, val) {
     //   wcRef.doc("matches").collection("groups").doc(group).set(val)
-      wcRef.doc("matches-test").set(matches.knockout)
+      wcRef.doc("matches-test").set(matches)
         .then(function () {
           console.log("written");
         })
@@ -69,7 +69,7 @@ $(document).ready(function () {
       });
   }
 
-  addMatches(tournament, "knockout");
+  addMatches(tournament);
   // addStadiums(tournament);
   // addTeams(tournament);
 
