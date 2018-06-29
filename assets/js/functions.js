@@ -50,7 +50,11 @@ function getTeams() {
 }
 
 function getTeamName(id) {
-    return teams[id].name;
+    if (teams[id]) {
+        return teams[id].name;
+    } else {
+        return "TBD";
+    }
 }
 
 function uploadPredictions() {
@@ -129,7 +133,6 @@ function getPredictions(uid) {
                     if (doc.exists) {
                         $.each(doc.data(), function (matchType, stage) {
                             $.each(stage, function (group, val) {
-                                console.log(group, val);
                                 // doc.data().forEach(function (group, val) {
                                 for (let i = 0; i < val.matches.length; i++) {
                                     let days = moment(val.matches[i].date).diff(moment(), "days");
@@ -154,7 +157,7 @@ function getPredictions(uid) {
                                             predictions[val.matches[i].name] = { date: val.matches[i].date };
                                         }
                                         addFixture(match);
-                                    } else {
+                                    } else if (seconds < 0) {
                                         addFixture(match, false);
                                     }
                                 }
