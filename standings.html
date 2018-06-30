@@ -44,19 +44,36 @@
     </nav>
     <main class="container-fluid">
         <h2>Standings</h2>
-        <table id="standings-table" class="table table-responsive">
-            <thead>
-                <tr>
-                    <th>Position</th>
-                    <th>Name</th>
-                    <!-- <th>Correct Score</th>
-                    <th>Correct Result</th> -->
-                    <th>Points</th>
-                </tr>
-                <tbody></tbody>
-            </thead>
-        </table>
-        <div id="predictions-active"></div>
+        <div class="row">
+            <div class="col-lg-12 col-xl-4">
+                <table id="standings-table" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Name</th>
+                            <!-- <th>Correct Score</th>
+                                <th>Correct Result</th> -->
+                            <th>Points</th>
+                        </tr>
+                        <tbody></tbody>
+                    </thead>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <table id="info-table" class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Correct Score: </th>
+                            <td>3 Points</td>
+                        </tr>
+                        <tr>
+                            <th>Correct Result: </th>
+                            <td>1 Points</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
     <!-- footer -->
     <footer>
