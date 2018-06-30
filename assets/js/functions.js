@@ -57,7 +57,7 @@ function getTeamName(id) {
     }
 }
 
-function uploadPredictions() {
+function uploadPredictions(user) {
     usersRef.doc(user.providerData[0].uid).get()
         .then(function (snap) {
             if (snap.exists) {
@@ -79,6 +79,7 @@ function uploadPredictions() {
                 //         console.log("Error writing document: " + error);
                 //         $("#confirm-msg").text("There was an error, please try again later");
                 //     });
+
                 usersRef.doc(user.providerData[0].uid).set({ name: user.displayName, predictions: Object.assign({}, predictions) })
                     .then(function () {
                         console.log("set new uid");
@@ -90,6 +91,18 @@ function uploadPredictions() {
                     });
             }
         })
+}
+
+function updateAllScores(uid) {
+    usersRef.doc(uid).update({ predictions: Object.assign({}, predictions) })
+        .then(function () {
+            console.log("update uid");
+            $("#confirm-msg").text("Predictions updated!");
+        })
+        .catch(function (error) {
+            console.log("Error writing document: " + error);
+            $("#confirm-msg").text("There was an error, please try again later");
+        });
 }
 
 function uploadScores() {
@@ -132,82 +145,87 @@ function getPredictions(uid) {
                 .then(function (doc) {
                     if (doc.exists) {
                         // $.each(doc.data(), function (matchType, stage) {
-                            // $.each(stage, function (group, val) {
-                            $.each(doc.data()["knockout"], function (group, val) {
-                                // doc.data().forEach(function (group, val) {
-                                for (let i = 0; i < val.matches.length; i++) {
-                                    let days = moment(val.matches[i].date).diff(moment(), "days");
-                                    let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
-                                    // console.log(days);
-                                    let match = {
-                                        id: val.matches[i].name,
-                                        group: group,
-                                        home_team: val.matches[i].home_team,
-                                        away_team: val.matches[i].away_team,
-                                        home_result: val.matches[i].home_result,
-                                        away_result: val.matches[i].away_result,
-                                        stadium: val.matches[i].stadium,
-                                        type: val.matches[i].type,
-                                        date: val.matches[i].date,
-                                    };
-                                    matches[val.matches[i].name] = match;
-                                    if (days <= rangeLimit && days >= 0 && seconds >= 0) {
-                                        if (predictions[val.matches[i].name]) {
-                                            predictions[val.matches[i].name]["date"] = val.matches[i].date;
-                                        } else {
-                                            predictions[val.matches[i].name] = { date: val.matches[i].date };
-                                        }
-                                        // only add fixture if match has determined teams
-                                        if (match.home_team < teams.length && match.home_team > 0) {
-                                            addFixture(match);
-                                        }
-                                    } 
-                                    // else if (seconds < 0) {
-                                    //     addFixture(match, false);
-                                    // }
+                        // $.each(stage, function (group, val) {
+                        $.each(doc.data()["knockout"], function (group, val) {
+                            // doc.data().forEach(function (group, val) {
+                            for (let i = 0; i < val.matches.length; i++) {
+                                let days = moment(val.matches[i].date).diff(moment(), "days");
+                                let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
+                                // console.log(days);
+                                let match = {
+                                    id: val.matches[i].name,
+                                    group: group,
+                                    home_team: val.matches[i].home_team,
+                                    away_team: val.matches[i].away_team,
+                                    home_result: val.matches[i].home_result,
+                                    away_result: val.matches[i].away_result,
+                                    stadium: val.matches[i].stadium,
+                                    type: val.matches[i].type,
+                                    date: val.matches[i].date,
+                                };
+                                matches[val.matches[i].name] = match;
+                                if (days <= rangeLimit && days >= 0 && seconds >= 0) {
+                                    if (predictions[val.matches[i].name]) {
+                                        predictions[val.matches[i].name]["date"] = val.matches[i].date;
+                                    } else {
+                                        predictions[val.matches[i].name] = { date: val.matches[i].date };
+                                    }
+                                    // only add fixture if match has determined teams
+                                    if (match.home_team < teams.length && match.home_team > 0) {
+                                        addFixture(match);
+                                    }
                                 }
-                            });
+                                // else if (seconds < 0) {
+                                //     addFixture(match, false);
+                                // }
+                            }
+                        });
                         // });
                     }
                 });
         });
 }
 
-function getPredictionsTest(uid) {
+function getPredictionsTest(uid, predictions, callback) {
     usersRef.doc(uid).get()
         .then(function (snap) {
             if (snap.exists) {
                 $.each(snap.data()["predictions"], function (id, val) {
                     predictions[id] = val;
                 });
+                callback(predictions);
             }
         });
+    // return predictions;
 }
 
 // get matches
-function getMatches() {
+function getMatches(callback) {
     wcRef.doc("matches-test").get()
         .then(function (doc) {
             if (doc.exists) {
-                $.each(doc.data(), function (group, val) {
-                    // doc.data().forEach(function (group, val) {
-                    for (let i = 0; i < val.matches.length; i++) {
-                        // console.log(days);
-                        let match = {
-                            firestoreId: i,
-                            id: val.matches[i].name,
-                            group: group,
-                            home_team: val.matches[i].home_team,
-                            away_team: val.matches[i].away_team,
-                            home_result: val.matches[i].home_result,
-                            away_result: val.matches[i].away_result,
-                            stadium: val.matches[i].stadium,
-                            type: val.matches[i].type,
-                            date: val.matches[i].date,
-                        };
-                        matches[val.matches[i].name] = match;
-                    }
+                $.each(doc.data(), function (matchType, stage) {
+                    $.each(stage, function (group, val) {
+                        for (let i = 0; i < val.matches.length; i++) {
+                            let days = moment(val.matches[i].date).diff(moment(), "days");
+                            let seconds = moment(val.matches[i].date).diff(moment(), "seconds");
+                            // console.log(days);
+                            let match = {
+                                id: val.matches[i].name,
+                                group: group,
+                                home_team: val.matches[i].home_team,
+                                away_team: val.matches[i].away_team,
+                                home_result: val.matches[i].home_result,
+                                away_result: val.matches[i].away_result,
+                                stadium: val.matches[i].stadium,
+                                type: val.matches[i].type,
+                                date: val.matches[i].date,
+                            };
+                            matches[val.matches[i].name] = match;
+                        }
+                    });
                 });
+                callback();
             }
         });
 }
@@ -229,5 +247,22 @@ function createFixtures() {
         } else {
             addFixture(matches[i], false);
         }
+    }
+}
+
+// compare predictions to actual scores
+function calcPts(match, userPred, i) {
+    // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])}`);
+    if (userPred["home_result"] == match["home_result"] && userPred["away_result"] == match["away_result"]) {
+        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])}`);
+        return pts.score;
+    } else if (userPred["home_result"] == userPred["away_result"] && match["home_result"] == match["away_result"]) {
+        return pts.result;
+    } else if (userPred["home_result"] > userPred["away_result"] && match["home_result"] > match["away_result"]) {
+        return pts.result;
+    } else if (userPred["home_result"] < userPred["away_result"] && match["home_result"] < match["away_result"]) {
+        return pts.result;
+    } else {
+        return 0;
     }
 }

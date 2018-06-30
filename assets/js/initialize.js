@@ -29,3 +29,9 @@ let rangeLimit = 10; // display only matches 10 days from now
 let matches = [];
 let teams = [];
 let predictions = [];
+
+// points for correct predictions
+const pts = {
+    score: 3,
+    result: 1
+};
