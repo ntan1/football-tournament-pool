@@ -14,6 +14,7 @@ $(document).ready(function () {
                         standings.push({
                             name: data.name,
                             points: data.points,
+                            points: data.games,
                         });
                     });
                     console.log(standings);
@@ -22,9 +23,10 @@ $(document).ready(function () {
                     })
                     for (let i = 0; i < standings.length; i++) {
                         $("#standings-table").find("tbody").append(
-                            `<tr><td>${i + 1}</td><td>${standings[i].name}</td><td>${standings[i].points}</td></tr>`
+                            `<tr><td>${i + 1}</td><td>${standings[i].name}</td><td>${standings[i].games}</td><td>${standings[i].points}</td></tr>`
                         );
                     }
+                    $("#last-updated").text(`Updated ${moment(doc.data().updated).format("M/D h:mma")}`);
                 });
         } else {
             // No user is signed in.

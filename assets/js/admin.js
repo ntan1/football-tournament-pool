@@ -16,7 +16,8 @@ $(document).ready(function () {
         } else {
             // No user is signed in.
             console.log("not logged in");
-            // window.location = 'index.html';
+            $("main").html("");
+            window.location = 'index.html';
         }
     });
 
@@ -59,6 +60,7 @@ $(document).ready(function () {
                     // console.log(user.id + ": " + user.data().name);
                     let userPredictions = [];
                     let userPts = 0;
+                    let games = 0;
                     // userPredictions = getPredictionsTest(user.id, userPredictions);
                     getPredictionsTest(user.id, userPredictions, (pred) => {
                         // console.log(matches);
@@ -66,14 +68,17 @@ $(document).ready(function () {
                             if (matches[i]["home_result"] !== null) {
                                 if (pred[i]) {
                                     userPts += calcPts(matches[i], pred[i], i);
+                                    games++;
                                 }
                             }
                         }
 
                         // tally points and store in firestore
                         wcRef.doc("standings").update({
+                            updated: moment.utc(),
                             [user.id]: {
                                 name: user.data().name,
+                                games: games,
                                 points: userPts
                             }
                         })
