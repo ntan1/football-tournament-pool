@@ -57,7 +57,7 @@ function getTeamName(id) {
     }
 }
 
-function uploadPredictions(user) {
+function uploadPredictions() {
     usersRef.doc(user.providerData[0].uid).get()
         .then(function (snap) {
             if (snap.exists) {
@@ -254,7 +254,7 @@ function createFixtures() {
 function calcPts(match, userPred, i) {
     // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])}`);
     if (userPred["home_result"] == match["home_result"] && userPred["away_result"] == match["away_result"]) {
-        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])}`);
+        console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])}`);
         return pts.score;
     } else if (userPred["home_result"] == userPred["away_result"] && match["home_result"] == match["away_result"]) {
         return pts.result;
