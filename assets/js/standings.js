@@ -14,7 +14,7 @@ $(document).ready(function () {
                         standings.push({
                             name: data.name,
                             points: data.points,
-                            points: data.games,
+                            games: data.games,
                         });
                     });
                     console.log(standings);

@@ -75,7 +75,6 @@ $(document).ready(function () {
 
                         // tally points and store in firestore
                         wcRef.doc("standings").update({
-                            updated: moment.utc(),
                             [user.id]: {
                                 name: user.data().name,
                                 games: games,
@@ -83,6 +82,9 @@ $(document).ready(function () {
                             }
                         })
                             .then(function () {
+                                wcRef.doc("standings").update({
+                                    updated: moment.utc()
+                                })
                                 console.log("update uid");
                                 $("#confirm-msg-calc").text("Updated standings!");
                             })
