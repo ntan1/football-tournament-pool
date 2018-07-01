@@ -33,7 +33,7 @@ function addFixtureReal(match) {
     $("#fixture-active").append(matchDiv, dateDiv);
 }
 
-function getTeams() {
+function getTeams(callback) {
     wcRef.doc("teams").get()
         .then(function (doc) {
             if (doc.exists) {
@@ -46,6 +46,7 @@ function getTeams() {
                     teams[tempTeams[i].id] = team;
                 }
             }
+            callback();
         });
 }
 
