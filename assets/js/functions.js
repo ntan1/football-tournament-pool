@@ -255,19 +255,19 @@ function createFixtures() {
 function calcPts(match, userPred, i) {
     // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])}`);
     if (userPred["home_result"] == match["home_result"] && userPred["away_result"] == match["away_result"]) {
-        console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} score`);
+        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} score`);
         return pts.score;
     } else if (userPred["home_result"] == userPred["away_result"] && match["home_result"] == match["away_result"]) {
-        console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} draw`);
+        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} draw`);
         return pts.result;
     } else if (userPred["home_result"] > userPred["away_result"] && match["home_result"] > match["away_result"]) {
-        console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} win`);
+        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} win`);
         return pts.result;
     } else if (userPred["home_result"] < userPred["away_result"] && match["home_result"] < match["away_result"]) {
-        console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} win`);
+        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} win`);
         return pts.result;
     } else {
-        console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} wrong`);
+        // console.log(`${i} User: ${userPred["home_result"]}-${userPred["away_result"]} | Real: ${match["home_result"]}-${match["away_result"]} | ${getTeamName(match["home_team"])} vs. ${getTeamName(match["away_team"])} wrong`);
         return 0;
     }
 }

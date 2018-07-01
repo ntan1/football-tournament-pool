@@ -9,14 +9,16 @@ $(document).ready(function () {
             wcRef.doc("standings").get()
                 .then(doc => {
                     console.log(doc.data());
-                    $.each(doc.data(), (user, data) => {
-                        console.log(data.name);
-                        standings.push({
-                            name: data.name,
-                            points: data.points,
-                            games: data.games,
+                    if (data.name) {
+                        $.each(doc.data(), (user, data) => {
+                            console.log(data.name);
+                            standings.push({
+                                name: data.name,
+                                points: data.points ? data.points : 0,
+                                games: data.games ? data.games : 0,
+                            });
                         });
-                    });
+                    }
                     console.log(standings);
                     standings.sort((a, b) => {
                         return b.points - a.points;
