@@ -83,7 +83,7 @@ $(document).ready(function () {
                         })
                             .then(function () {
                                 wcRef.doc("standings").update({
-                                    updated: moment.utc()
+                                    updated: moment.utc().format()
                                 })
                                 console.log("update uid");
                                 $("#confirm-msg-calc").text("Updated standings!");
