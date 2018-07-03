@@ -65,7 +65,7 @@ $(document).ready(function () {
                     getPredictionsTest(user.id, userPredictions, (pred) => {
                         // console.log(matches);
                         for (let i = 1; i < matches.length; i++) {
-                            if (matches[i]["home_result"] !== null) {
+                            if (matches[i]["home_result"] !== null && matches[i]["away_result"] !== null) {
                                 if (pred[i]) {
                                     userPts += calcPts(matches[i], pred[i], i);
                                     games++;
