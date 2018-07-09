@@ -1249,11 +1249,11 @@ const matches = {
                     "type": "winner",
                     "home_team": 4,
                     "away_team": 9,
-                    "home_result": null,
-                    "away_result": null,
+                    "home_result": 0,
+                    "away_result": 2,
                     "home_penalty": null,
                     "away_penalty": null,
-                    "winner": null,
+                    "winner": 9,
                     "date": "2018-07-06T17:00:00+03:00",
                     "stadium": 6,
                     "channels": [
@@ -1261,7 +1261,7 @@ const matches = {
                         14,
                         15
                     ],
-                    "finished": false,
+                    "finished": true,
                     "matchday": 5
                 },
                 {
@@ -1269,11 +1269,11 @@ const matches = {
                     "type": "winner",
                     "home_team": 17,
                     "away_team": 25,
-                    "home_result": null,
-                    "away_result": null,
+                    "home_result": 1,
+                    "away_result": 2,
                     "home_penalty": null,
                     "away_penalty": null,
-                    "winner": null,
+                    "winner": 25,
                     "date": "2018-07-06T21:00:00+03:00",
                     "stadium": 5,
                     "channels": [
@@ -1281,7 +1281,7 @@ const matches = {
                         14,
                         15
                     ],
-                    "finished": false,
+                    "finished": true,
                     "matchday": 5
                 },
                 {
@@ -1289,11 +1289,11 @@ const matches = {
                     "type": "winner",
                     "home_team": 1,
                     "away_team": 15,
-                    "home_result": null,
-                    "away_result": null,
-                    "home_penalty": null,
-                    "away_penalty": null,
-                    "winner": null,
+                    "home_result": 2,
+                    "away_result": 2,
+                    "home_penalty": 3,
+                    "away_penalty": 4,
+                    "winner": 15,
                     "date": "2018-07-07T21:00:00+03:00",
                     "stadium": 11,
                     "channels": [
@@ -1301,7 +1301,7 @@ const matches = {
                         13,
                         16
                     ],
-                    "finished": false,
+                    "finished": true,
                     "matchday": 5
                 },
                 {
@@ -1309,11 +1309,11 @@ const matches = {
                     "type": "winner",
                     "home_team": 23,
                     "away_team": 28,
-                    "home_result": null,
-                    "away_result": null,
+                    "home_result": 0,
+                    "away_result": 2,
                     "home_penalty": null,
                     "away_penalty": null,
-                    "winner": null,
+                    "winner": 28,
                     "date": "2018-07-07T18:00:00+04:00",
                     "stadium": 7,
                     "channels": [
@@ -1321,7 +1321,7 @@ const matches = {
                         13,
                         16
                     ],
-                    "finished": false,
+                    "finished": true,
                     "matchday": 5
                 }
             ]
@@ -1332,8 +1332,8 @@ const matches = {
                 {
                     "name": 61,
                     "type": "winner",
-                    "home_team": 57,
-                    "away_team": 58,
+                    "home_team": 9,
+                    "away_team": 25,
                     "home_result": null,
                     "away_result": null,
                     "home_penalty": null,
@@ -1352,8 +1352,8 @@ const matches = {
                 {
                     "name": 62,
                     "type": "winner",
-                    "home_team": 59,
-                    "away_team": 60,
+                    "home_team": 15,
+                    "away_team": 28,
                     "home_result": null,
                     "away_result": null,
                     "home_penalty": null,
