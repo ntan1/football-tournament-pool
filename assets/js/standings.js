@@ -8,10 +8,8 @@ $(document).ready(function () {
             // get standings
             wcRef.doc("standings").get()
                 .then(doc => {
-                    console.log(doc.data());
                     $.each(doc.data(), (user, data) => {
                         if (data.name) {
-                            console.log(data.name);
                             standings.push({
                                 name: data.name,
                                 points: data.points ? data.points : 0,
@@ -19,7 +17,6 @@ $(document).ready(function () {
                             });
                         }
                     });
-                    console.log(standings);
                     standings.sort((a, b) => {
                         return b.points - a.points;
                     })
