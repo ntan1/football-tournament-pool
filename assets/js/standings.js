@@ -1,5 +1,6 @@
 $(document).ready(function () {
     let standings = [];
+    let numOfMatches = 64;
 
     firebase.auth().onAuthStateChanged(function (theUser) {
         if (theUser) {
@@ -24,6 +25,9 @@ $(document).ready(function () {
                         $("#standings-table").find("tbody").append(
                             `<tr><td>${i + 1}</td><td>${standings[i].name}</td><td>${standings[i].games}</td><td>${standings[i].points}</td></tr>`
                         );
+                    }
+                    if (standings[0].games === numOfMatches) {
+                        $("#winner-msg").text(`Congratulations to ${standings[0].name}!`);
                     }
                     $("#last-updated").text(`Updated ${moment(doc.data().updated).format("M/D h:mma")}`);
                 });
