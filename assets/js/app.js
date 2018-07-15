@@ -42,6 +42,9 @@ $(document).ready(function () {
     $("#confirm-msg").text("");
     let allPredictions = $("#predictions-active").find(".match");
     let completed = true;
+    if (!allPredictions) {
+      completed = false;
+    }
     for (let i = 0; i < allPredictions.length; i++) {
       let id = $(allPredictions[i]).data("id");
       let homeScore = parseInt($(allPredictions[i]).find(".home-result").val());
